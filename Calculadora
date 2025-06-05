@@ -1,0 +1,129 @@
+//Proposta: Fazer uma calculadora 
+package pscdaniel;
+
+import java.util.Scanner;
+
+public class Calculadora {
+    public static void main(String[] args) {
+        Scanner leia = new Scanner(System.in);
+        Operacoes Calcular = new Operacoes();
+       do {
+        Calcular.SetNum();
+        Calcular.SetOperacao();
+        Calcular.SetNumDois();
+       System.out.printf("%.2f\n",Calcular.TipoOperacao());
+       System.out.println("Deseja continuar ? : [S]para Sim , [Q]para Não");
+       Calcular.Continuar = leia.next();
+       } while (!Calcular.Continuar.equals("Q")); 
+   leia.close(); }
+}
+
+
+
+
+package pscdaniel;
+
+import java.util.Scanner;
+public class Operacoes {
+    Scanner leia = new Scanner(System.in);
+    private float n1;
+    private float n2;
+    private String TipodaOperacao;
+    String Continuar;
+    public void SetNum(){
+    System.out.println("Primeiro número :");
+     n1 = leia.nextFloat();
+
+    }
+      public void SetOperacao(){
+        System.out.println("Qual operação?");
+        TipodaOperacao = leia.next();
+      
+
+    }
+    
+      public void SetNumDois(){
+         System.out.println("segundo número :");
+         n2 = leia.nextFloat();
+         
+    }
+     
+    
+    
+    public float TipoOperacao(){
+       
+        switch (TipodaOperacao) {
+            case "+":
+                return GetSoma();
+            case "-":
+                return GetSubtr();
+            case "*":
+            return GetMultiplicar();
+
+            case "/":
+            if(n2==0){
+                System.out.println("ERROR \nIMPOSSIVEL REALIZAR A DIVISÃO!");
+                return 0;
+            }else{
+                return GetDivisao();
+            }
+            case "^":
+            if(n2==0){
+                return 1;
+            }
+            return (float)Math.pow(n1, n2);
+
+            case "|":
+            if(n1<0){
+                System.out.println("NÃO EXISTE RAIZ DE NÚMERO NEGATIVO!");
+                break;
+            }
+            int TipoRaiz;
+            System.out.println("Qual o tipo da raiz?");
+            TipoRaiz = leia.nextInt();
+            if(TipoRaiz == 2){
+                return (float)Math.sqrt(n1);
+            }if(TipoRaiz == 3){
+                return (float)Math.cbrt(n1);
+            }
+
+            
+        
+            default: System.out.println("Operação invalida");
+                break;
+        } 
+       
+        return 0;
+      }
+    
+    
+    
+    
+    
+      public float GetSoma(){
+        return n1+n2;
+    }
+
+    
+      public float GetSubtr(){
+        return n1-n2;
+    }
+      
+      public float GetMultiplicar(){
+        return n1 *n2;
+    }
+
+      public float GetDivisao(){
+        return n1/n2;
+      }
+
+      public float GetPotencia(){
+        return (float)Math.pow(n1, n2);
+      }
+
+      public float Getraiz(){
+        return (float)Math.sqrt(n1);
+      }
+
+
+}
